@@ -27,4 +27,14 @@ public class MemberMissionResponseDTO {
     public static class MissionListDTO {
         private List<MissionPreviewDTO> missionList;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ChallengeResultDTO {
+        private Long memberMissionId;
+        private Long missionId;
+        private String status;
+    }
 }
