@@ -1,5 +1,6 @@
 package umc.spring.converter;
 
+import org.springframework.data.domain.Page;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.Member;
 import umc.spring.domain.mapping.MemberMission;
@@ -20,6 +21,28 @@ public class MemberMissionConverter {
                 .memberMissionId(memberMission.getId())
                 .missionId(memberMission.getMission().getId())
                 .status(memberMission.getStatus().name())
+                .build();
+    }
+
+    public static MemberMissionResponseDTO.OngoingMissionPreviewDTO toPreviewDTO(MemberMission memberMission) {
+        return MemberMissionResponseDTO.OngoingMissionPreviewDTO.builder()
+                .memberMissionId(memberMission.getId())
+                .missionSpec(memberMission.getMission().getMissionSpec())
+                .reward(memberMission.getMission().getReward())
+                .deadline(memberMission.getMission().getDeadline())
+                .build();
+    }
+
+    public static MemberMissionResponseDTO.OngoingMissionListDTO toListDTO(Page<MemberMission> missions) {
+        return MemberMissionResponseDTO.OngoingMissionListDTO.builder()
+                .missionList(missions.getContent().stream()
+                        .map(MemberMissionConverter::toPreviewDTO)
+                        .toList())
+                .listSize(missions.getSize())
+                .totalPage(missions.getTotalPages())
+                .totalElements(missions.getTotalElements())
+                .isFirst(missions.isFirst())
+                .isLast(missions.isLast())
                 .build();
     }
 }
