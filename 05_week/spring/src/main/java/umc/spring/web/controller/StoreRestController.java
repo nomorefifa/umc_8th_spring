@@ -17,6 +17,7 @@ import umc.spring.domain.mapping.Mission;
 import umc.spring.domain.mapping.Review;
 import umc.spring.domain.mapping.Store;
 import umc.spring.service.MissionService.MissionCommandService;
+import umc.spring.service.MissionService.MissionQueryService;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.service.StoreService.StoreQueryService;
 import umc.spring.web.dto.MissionRequestDTO;
@@ -68,5 +69,17 @@ public class StoreRestController {
         storeQueryService.getReviewList(storeId,page);
         Page<Review> reviewList = storeQueryService.getReviewList(storeId, page);
         return ApiResponse.onSuccess(StoreConverter.reviewPreViewListDTO(reviewList));
+    }
+
+    private final MissionQueryService missionQueryService;
+
+    @GetMapping("/{storeId}/missions")
+    public ApiResponse<MissionResponseDTO.MissionPreviewListDTO> getStoreMissions(
+            @PathVariable Long storeId,
+            @RequestParam(name = "page", defaultValue = "0") int page) {
+
+        return ApiResponse.onSuccess(
+                missionQueryService.getMissionsByStore(storeId, page)
+        );
     }
 }

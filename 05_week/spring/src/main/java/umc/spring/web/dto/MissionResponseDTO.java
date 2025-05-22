@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MissionResponseDTO {
     @Getter
@@ -17,5 +18,29 @@ public class MissionResponseDTO {
         private String missionSpec;
         private Integer reward;
         private LocalDateTime deadline;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewDTO {
+        private Long missionId;
+        private String missionSpec;
+        private Integer reward;
+        private LocalDateTime deadline;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MissionPreviewListDTO {
+        private List<MissionPreviewDTO> missionList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
     }
 }
