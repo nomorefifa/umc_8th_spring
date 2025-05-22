@@ -37,4 +37,28 @@ public class MemberMissionResponseDTO {
         private Long missionId;
         private String status;
     }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class OngoingMissionPreviewDTO {
+        private Long memberMissionId;
+        private String missionSpec;
+        private Integer reward;
+        private LocalDateTime deadline;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class OngoingMissionListDTO {
+        private List<OngoingMissionPreviewDTO> missionList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
+    }
 }
